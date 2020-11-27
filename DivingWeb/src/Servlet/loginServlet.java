@@ -43,7 +43,7 @@ public class loginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		
-		
+			HttpSession session = request.getSession();
 			
 			String actor=request.getParameter("actor");;//商家或會員登入
 			String Id;
@@ -58,8 +58,8 @@ public class loginServlet extends HttpServlet {
 //				 System.out.println("ID: " + request.getParameter("supplierId"));
 //				 System.out.println("Password: " + request.getParameter("supplierPassword"));
 			}else if(actor.equals("member")) {
-				 System.out.println("ID: " + request.getParameter("memberId"));
-				 System.out.println("Password: " + request.getParameter("memberPassword"));
+//				 System.out.println("ID: " + request.getParameter("memberId"));
+//				 System.out.println("Password: " + request.getParameter("memberPassword"));
 				 Id=request.getParameter("memberId");
 				 Password=request.getParameter("memberPassword");
 			}
@@ -73,33 +73,70 @@ public class loginServlet extends HttpServlet {
 			
 			//String loginjson=gson.toJson(login.loginActor(actor, Id, Password));
 			//System.out.println("loginjson="+loginjson);
-			String loginString=login.loginActor(actor, Id, Password);
-			System.out.println("MES:" + loginString);
-			
-			if(loginString.equals("LoginSuccessfully")) {
-				//登入成功後取得Num
-//				System.out.println("Yes");
-				if(actor.equals("supplier")) {
-					Num=login.readSupplierNumById(Id);
-				}else if(actor.equals("member")) {
-					Num=login.readMemberNumById(Id);
+			try{
+				session.getAttribute("registerfail"); 
+				System.out.println(session.getAttribute("registerfail"));
+				boolean registerfail = (boolean) session.getAttribute("registerfail");
+				String loginString=login.loginActor(actor, Id, Password, registerfail);
+				System.out.println("MES:" + loginString);
+				
+				if(loginString.equals("LoginSuccessfully")) {
+					//登入成功後取得Num
+//					System.out.println("Yes");
+					if(actor.equals("supplier")) {
+						Num=login.readSupplierNumById(Id);
+					}else if(actor.equals("member")) {
+						Num=login.readMemberNumById(Id);
+					}
+					else {
+						Num=0;}
+					
+					session.setAttribute("actor", actor);
+					session.setAttribute("Id", Id);
+					session.setAttribute("Num", Num);
+					request.setAttribute("message", loginString);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
+					
+					System.out.println("ID: "+ session.getAttribute("Id"));
 				}
 				else {
-					Num=0;}
-				
-				HttpSession session=request.getSession();
-				session.setAttribute("actor", actor);
-				session.setAttribute("Id", Id);
-				session.setAttribute("Num", Num);
-				request.setAttribute("message", loginString);
-				request.getRequestDispatcher("Login.jsp").forward(request, response);
-				
-				System.out.println("ID: "+ session.getAttribute("Id"));
+					request.setAttribute("message", loginString);
+					
+					request.getRequestDispatcher("LoginFail.jsp").forward(request, response);
+				}
 			}
-			else {
-				request.setAttribute("message", loginString);
+			catch(NullPointerException e) {
+				session.setAttribute("registerfail", true);
+				System.out.println(session.getAttribute("registerfail"));
+				boolean registerfail = (boolean) session.getAttribute("registerfail");
+				String loginString=login.loginActor(actor, Id, Password, registerfail);
+				System.out.println("MES:" + loginString);
 				
-				request.getRequestDispatcher("LoginFail.jsp").forward(request, response);
+				if(loginString.equals("LoginSuccessfully")) {
+					//登入成功後取得Num
+//					System.out.println("Yes");
+					if(actor.equals("supplier")) {
+						Num=login.readSupplierNumById(Id);
+					}else if(actor.equals("member")) {
+						Num=login.readMemberNumById(Id);
+					}
+					else {
+						Num=0;}
+					
+					session.setAttribute("actor", actor);
+					session.setAttribute("Id", Id);
+					session.setAttribute("Num", Num);
+					request.setAttribute("message", loginString);
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
+					
+					System.out.println("ID: "+ session.getAttribute("Id"));
+				}
+				else {
+					request.setAttribute("message", loginString);
+					
+					request.getRequestDispatcher("LoginFail.jsp").forward(request, response);
+				}
 			}
+			
 	}
 }

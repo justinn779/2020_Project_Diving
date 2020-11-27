@@ -10,7 +10,7 @@
 	<div id="addOrderdiv">
 		<!-- 廠商新增行程 form -->
 		<form class="addOrder" action="imagesUpload" method="post"
-			 enctype="multipart/form-data">
+			target="nm_iframe" enctype="multipart/form-data">
 
 			<div id="addOrder">
 
@@ -70,7 +70,7 @@
 				圖片4：<input type="file" name="newImage4" id="newImage4" style="width: 250px;" />
 					</div>
 					<!-- 廠商新增行程id -->
-					<div style="padding-left: 900px;">
+					<div style="padding-left: 500px;">
 						<input type="hidden" name="methods" value="create">
 						<button class="btn btn-danger btn-sm" type="submit"
 							name="methodsBtnSupplierTourCreate"
@@ -78,8 +78,6 @@
 					</div>
 				</div>
 			</div>
-		
-		
 			</form>
 		</div>
 	

@@ -45,6 +45,7 @@ public class memberController implements memberInterface {
 			ps.execute();
 		} catch (SQLException e) {
 			System.out.println("memberCreate Fail");
+			
 			e.printStackTrace();
 			return false;
 		}

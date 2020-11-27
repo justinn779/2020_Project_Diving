@@ -1,9 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- jstl -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -12,94 +15,82 @@
 		<div class='table'>
 			<div class='layout-inline row th'
 				style='font-size: 20px; line-height: 20px;'>
-				<div class='col col-pro' style='margin: 0px;'>¦æµ{°Ó«~</div>
-				<div class='col col-price align-center' style='margin: 0px;'>¤é´Á</div>
-				<div class='col col-qty align-center' style='margin: 0px;'>³æ»ù</div>
-				<div class='col' style='margin: 0px;'>¤H¼Æ</div>
-				<div class='col' style='margin: 0px;'>Á`»ù</div>
+				<div class='col col-pro ' style='margin: 0px;'>è¡Œç¨‹å•†å“</div>
+				<div class='col col-price align-center' style='margin: 0px;'>æ—¥æœŸ</div>
+				<div class='col col-qty align-center' style='margin: 0px;'>å–®åƒ¹</div>
+				<div class='col' style='margin: 0px;'>äººæ•¸</div>
+				<div class='col' style='margin: 0px;'>ç¸½åƒ¹</div>
+				<div class='col-1' style='margin: 0px;'></div>
 			</div>
-			<div class='layout-inline row' style='margin: 0px;'>
-				<div class='col col-pro layout-inline'
-					style='padding: 0px; margin: 0px;'>
-					<img src='./image/order1.jpg' alt='kitten' />
-					<p class='text-left' style='margin-left: 20px; line-height: 20px;'>ªü«¼À£¤@À£¾C¹CÅw¼Ö¤p¯[²y«C¬K¦ñ¹C</p>
+			<!-- è³¼ç‰©è»Šçš„è¡Œç¨‹ -->
+			<c:forEach var="cart" items="${cart}">
+				<div class='layout-inline row' style='margin: 0px;'>
+					<div class='col col-pro layout-inline'
+						style='padding: 0px; margin: 0px;'>
+						<img src='./image/tour/${cart.tourNum}/1.jpg' alt='kitten' />
+						<p class='text-left' style='margin-left: 20px; line-height: 20px;'>
+							<c:out value="${cart.tourName}" />
+						</p>
+					</div>
+					<div class='col col-price col-numeric align-center '
+						style='margin-right: 5px; padding: 20px 10px 0px 0px;' >
+						<p>
+							<c:out value="${cart.tourDate}" />
+						</p>
+					</div>
+					<div class='col col-price col-numeric align-center '
+						style='margin-right: 20px; padding: 20px 10px 0px 0px;'>
+						<p>
+							$
+							<c:out value="${cart.tourPrice}" />
+						</p>
+					</div>
+					<div class='col col-qty layout-inline'
+						style='padding: 15px 0px 10px 0px; margin-right: 7px;'>
+						<button style="width: 30px; height: 30px; border-radius: 20px;" type='button' id="minus<c:out value="${cart.tourNum}"/>"
+							value="<c:out value="${cart.tourNum}"/>"
+							onclick="minusOne_click(this.value)"><h6 style="font-size: 24px;">-</h6></button>
+
+							<h6 style="margin-bottom: 0px; font-size: 20px;"><c:out value="${cart.tourPeople}" /></h6>
+
+						<button style="width: 30px; height: 30px; border-radius: 20px;" type='button' id="<c:out value="${cart.tourNum}"/>"
+							onclick="addOne_click(this.id)"><h6 style="font-size: 24px;">+</h6></button>
+					</div>
+					<div class='col col-total col-numeric'
+						style='margin-right: 10px; padding: 20px 10px 0px 0px;'>
+						<p>
+							$
+							<c:out value="${cart.tourTotalPrice}" />
+						</p>
+
+					</div>
+
+					<div style="padding-top: 6px;padding-right: 10px;">
+						<button type='button' class="btn btn-outline-danger"
+							id="deleteTour<c:out value="${cart.tourNum}"/>"
+							value="<c:out value="${cart.tourNum}"/>"
+							onclick="delete_click(this.value)">åˆªé™¤</button>
+					</div>
 				</div>
-				<div class='col col-price col-numeric align-center '
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>2018-11-10</p>
-				</div>
-				<div class='col col-price col-numeric align-center '
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>$2000</p>
-				</div>
-				<div class='col col-qty layout-inline'
-					style='padding: 15px 0px 10px 20px; margin: 0px;'>
-					<input type='number' value='3' />
-				</div>
-				<div class='col col-total col-numeric'
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>$6000</p>
-				</div>
-			</div>
-			<div class='layout-inline row row-bg2' style='margin: 0px;'>
-				<div class='col col-pro layout-inline'
-					style='padding: 0px; margin: 0px;'>
-					<img src='./image/order2.jpg' alt='kitten' />
-					<p class='text-left' style='margin-left: 20px; line-height: 20px;'>ÃTÃT¾C¹CÅw¼Ö¤p¯[²y«C¬K¦ñ¹C</p>
-				</div>
-				<div class='col col-price col-numeric align-center '
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>2018-11-10</p>
-				</div>
-				<div class='col col-price col-numeric align-center '
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>$2000</p>
-				</div>
-				<div class='col col-qty  layout-inline'
-					style='padding: 15px 0px 10px 20px; margin: 0px;'>
-					<input type='number' value='1' />
-				</div>
-				<div class='col col-total col-numeric'
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>$2000</p>
-				</div>
-			</div>
-			<div class='layout-inline row' style='margin: 0px;'>
-				<div class='col col-pro layout-inline'
-					style='padding: 0px; margin: 0px;'>
-					<img src='./image/order3.jpg' alt='kitten' />
-					<p class='text-left' style='margin-left: 20px; line-height: 20px;'>®üÀt¾C¹CÅw¼Ö¤p¯[²y«C¬K¦ñ¹C</p>
-				</div>
-				<div class='col col-price col-numeric align-center'
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>2018-11-10</p>
-				</div>
-				<div class='col col-price col-numeric align-center'
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>$2000</p>
-				</div>
-				<div class='col col-qty layout-inline'
-					style='padding: 15px 0px 10px 20px; margin: 0px;'>
-					<input type='number' value='3' />
-				</div>
-				<div class='col col-total col-numeric'
-					style='margin: 0px; padding: 20px 10px 0px 10px;'>
-					<p>$6000</p>
-				</div>
-			</div>
+			</c:forEach>
+			<!-- è³¼ç‰©è»Šçš„è¡Œç¨‹ -->
+
+
 			<div class='tf'>
 				<div class='col' style='display: flex; width: 100%;'>
 					<div class='col'
 						style='margin: 0px 0px 0px 600px; width: 100%; text-align: right;'>
-						<p style='margin: 0px;'>­q³æÁ`ª÷ÃB</p>
+						<p style='margin: 0px;'>è¨‚å–®ç¸½é‡‘é¡</p>
 					</div>
 					<div class='col' style='margin-left: 70px; width: 100%;'>
-						<p style='margin: 0px;'>$14000</p>
+						<p style='margin-right: 10px;' id="orderTotalPrice1" value="${sum}">${sum}</p>
+						<input type="hidden" id="orderTotalPrice" value="${sum}"></input>
 					</div>
 				</div>
 			</div>
 			<div class='purchase-btn'>
-				<button type='button' name='button'>½T»{µ²±b</button>
+				<button type='button' id="buttonCheckBuy"
+					onclick="clickBuy(this.id)">ç¢ºèªçµå¸³</button>
 			</div>
 		</div>
 	</div>

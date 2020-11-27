@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -11,9 +11,9 @@
 		<h5>
 			<a class='nav-link dropdown-toggle' href=# id='navbarDropdown'
 				role='button' data-toggle='dropdown' aria-haspopup='true'
-				aria-expanded='false'>±z¦n¡A<%= request.getParameter("name") %></a>
+				aria-expanded='false'>æ‚¨å¥½ï¼Œ<%= request.getParameter("name") %></a>
 			<div class='dropdown-menu'>
-				<a class='dropdown-item' href=./storeDetail.html>¼t°Ó¤¤¤ß</a>
+				<a class='dropdown-item' href=./storeDetail.html>å» å•†ä¸­å¿ƒ</a>
 			</div>
 	</div>
 </body>

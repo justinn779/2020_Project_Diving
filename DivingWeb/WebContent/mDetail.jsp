@@ -1,21 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
-          <!-- ¼uµ¡­×§ï·|­û­Ó¤H¸ê®Æ -->
+          <!-- å½ˆçª—ä¿®æ”¹æœƒå“¡å€‹äººè³‡æ–™ -->
 	<div class="modal fade bd-example-modal-lg" id="mmodi" tabindex="-1" role="dialog"
 		aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalCenterTitle">§ó§ï¸ê®Æ</h5>
+						<h5 class="modal-title" id="exampleModalCenterTitle" style="border-bottom:0px; text-align: center; margin-left:40px;">æ›´æ”¹è³‡æ–™</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -25,21 +25,21 @@
 						<form>
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label for="inSupplierName">·|­û©m¦W</label> <input type="text"
+									<label for="inSupplierName">æœƒå“¡å§“å</label> <input type="text"
 										class="form-control" id="memberUpdateName" value="${requestScope.mName}">
 								</div>
 								<div class="form-group col-md-6">
-									<label for="inputPassword4">·|­û±K½X</label> <input type="text"
+									<label for="inputPassword4">æœƒå“¡å¯†ç¢¼</label> <input type="text"
 										class="form-control" id="memberUpdatePassword" value="${requestScope.mPassword}">
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputAddress">¹q¤l«H½c</label> <input type="email"
+								<label for="inputAddress">é›»å­ä¿¡ç®±</label> <input type="email"
 									class="form-control" id="memberUpdateMail" value="${requestScope.mMail}">
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label for="inputPhone">³sµ¸¹q¸Ü</label> <input type="text"
+									<label for="inputPhone">é€£çµ¡é›»è©±</label> <input type="text"
 										class="form-control" id="memberUpdatePhone" value="${requestScope.mPhone}">
 								</div>
 							</div>
@@ -47,9 +47,9 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">¨ú®ø</button>
-							<!-- ·s¼Wid -->
-						<button type="button" class="btn btn-primary" id=methodsBtnMemberUupdate onclick="backtowin()">Àx¦s</button>
+							data-dismiss="modal">å–æ¶ˆ</button>
+							<!-- æ–°å¢id -->
+						<button type="button" class="btn btn-primary" id=methodsBtnMemberUupdate onclick="backtowin()">å„²å­˜</button>
 					</div>
 				</div>
 			</div>
@@ -57,38 +57,38 @@
 	</div>
 	
 				<div>
-                <h5>¨p¤H¸ê®Æ</h5>
+                <h5 style="width: 550px;">ç§äººè³‡æ–™</h5>
               </div>
 
               <div class="contt">
-                <h4>·|­û©m¦W¡G${requestScope.mName}</h4><h4 id="back">¥X¥Í¤é´Á¡G${requestScope.mBirth}</h4>
+                <h4>æœƒå“¡å§“åï¼š${requestScope.mName}</h4><h4 id="back">å‡ºç”Ÿæ—¥æœŸï¼š${requestScope.mBirth}</h4>
               </div>
 
               <div>
-                <h5>±b¸¹¸ê®Æ</h5>
+                <h5 style="width: 550px;">å¸³è™Ÿè³‡æ–™</h5>
               </div>
 
               <div class="contt">
-                <h4>·|­û±b¸¹¡G${requestScope.mId}</h4><h4 id="back">·|­û±K½X¡G********</h4>
+                <h4>æœƒå“¡å¸³è™Ÿï¼š${requestScope.mId}</h4><h4 id="back">æœƒå“¡å¯†ç¢¼ï¼š********</h4>
               </div>
 
               <div>
-                <h5>Ápµ¸¸ê°T</h5>
+                <h5 style="width: 550px;">è¯çµ¡è³‡è¨Š</h5>
               </div>
 
               <div class="contt">
-                <h4>³sµ¸¹q¸Ü¡G${requestScope.mPhone}</h4><h4 id="back">¹q¤l«H½c¡G${requestScope.mMail}</h4>
+                <h4>é€£çµ¡é›»è©±ï¼š${requestScope.mPhone}</h4><h4 id="back">é›»å­ä¿¡ç®±ï¼š${requestScope.mMail}</h4>
               </div>
 
               <div class="contt">
-                <!--  <input id="btt" type="submit" value="­×§ï­Ó¤H¸ê®Æ">  -->
+                <!--  <input id="btt" type="submit" value="ä¿®æ”¹å€‹äººè³‡æ–™">  -->
                 <button type="button" class="btn btn-outline-primary" 
-				data-toggle="modal" data-target="#mmodi">­×§ï¸ê®Æ</button>
+				data-toggle="modal" data-target="#mmodi">ä¿®æ”¹è³‡æ–™</button>
               </div>
               
               
     
-	<!-- ­×§ï·|­û¸ê®Æ -->
+	<!-- ä¿®æ”¹æœƒå“¡è³‡æ–™ -->
 	<script>
 	
 	function backtowin(){

@@ -44,7 +44,7 @@ public class supplierServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		
+		boolean msf;
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
@@ -59,7 +59,14 @@ public class supplierServlet extends HttpServlet {
 					request.getParameter("supplierName"),
 					request.getParameter("supplierMail"),
 					request.getParameter("supplierPhone"));
-			request.setAttribute("ans", sc.create(createsup));
+			
+			msf =  sc.create(createsup);
+			session.setAttribute("registerfail", msf);
+			
+			if(!msf) response.getWriter().append("註冊失敗");
+			else response.getWriter().append("註冊成功");
+			
+			
 			break;
 		case "read":	
 			supplierModel readsup=sc.read(Integer.parseInt(session.getAttribute("Num").toString()));

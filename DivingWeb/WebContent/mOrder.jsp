@@ -1,119 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!-- jstl -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class=card-deck>
+<!--  -->
+	<c:forEach var="orderMember" items="${orderReadByMember}">
+	<div class="row">
+		<div class="col-md-3" style="margin-bottom: 0px; margin-top: 10px;">
+           <img src="./image/order1.jpg" class="card-img" alt="">
+        </div>
+        <div class="card col-md-9" style="max-width: 1200px;height: 200px;overflow-y:scroll; SCROLLBAR-FACE-COLOR: #c2d3fc; SCROLLBAR-HIGHLIGHT-COLOR: #c2d3fc; SCROLLBAR-SHADOW-COLOR: BLACK; SCROLLBAR-3DLIGHT-COLOR: #c2d3fc; SCROLLBAR-ARROW-COLOR:#000000; SCROLLBAR-TRACK-COLOR: FFFFFF; SCROLLBAR-DARKSHADOW-COLOR: EAECEC;">
+        	<div class="card-body text-center " style="font-size: 18px; box-shadow: 0 0 8px 0 rgba(0,0,0,0.5); background: #4b4276;">
+               <b class="card-text" style="color: white;margin-right:10px;margin-left:20px;">Ë®ÇÂñÆÊó•ÊúüÔºö<c:out value="${orderMember.orderDate}"/></b>
+               <b class="card-text" style="color: white;margin-right:10px;margin-left:20px;">Á∏ΩÈáëÈ°çÔºö<c:out value="${orderMember.orderTotalPrice}"/></b>
+             </div>
+             <div class="row">
+             
+             	<div class="card-body col-md-6 text-center" style="font-size: 18px;">
+                   <b class="card-text text-center" style="color: black;">Ë°åÁ®ãÂêçÁ®±</b><p></p>
+	
+					<c:forEach var="orderDetail" items="${orderMember.orderDetail}" >	                                           
+                   <c:forEach var="allTour" items="${allTour}" >	
+                   <p class="card-text"><c:if test="${orderDetail.tourNum==allTour.tourNum}"><c:out value="${allTour.tourName}"/></c:if></p>
+                  </c:forEach>
+                   </c:forEach>
+                 </div>
+                 
+                 <div class="card-body col-md-3 text-center" style="font-size: 18px;">
+                   <b class="card-text" style="color: black;">Âá∫ÁôºÊó•Êúü</b><p></p>
+                        
+                   <c:forEach var="orderDetail" items="${orderMember.orderDetail}" >
+                   <p class="card-text"><c:out value="${orderDetail.orderDetailDate}"/></p>
+                   </c:forEach>
+                 </div>
+                 
+                 <div class="card-body col-md-3 text-center" style="font-size: 18px;">
+                   <b class="card-text" style="color: black;">‰∫∫Êï∏</b><p></p>
+                        
+                   <c:forEach var="orderDetail" items="${orderMember.orderDetail}" >
+                   <p class="card-text"><c:out value="${orderDetail.orderDetailPeople}"/>‰∫∫</p>
+                   </c:forEach>
+                 </div>
+                 
+             </div>
+        </div>
+	</div>
+	</c:forEach>
 
-
-                <div class="col-md-3 p-0" style="margin-bottom: 0px; margin-top: 10px;">
-                  <img src="./image/order1.jpg" class="card-img w-100" alt="">
-                </div>
-                <div class="card mb-3" style="max-width: 1200px; height: 200px;overflow-y:scroll; SCROLLBAR-FACE-COLOR: #c2d3fc; SCROLLBAR-HIGHLIGHT-COLOR: #c2d3fc; SCROLLBAR-SHADOW-COLOR: BLACK; SCROLLBAR-3DLIGHT-COLOR: #c2d3fc; SCROLLBAR-ARROW-COLOR:#000000; SCROLLBAR-TRACK-COLOR: FFFFFF; SCROLLBAR-DARKSHADOW-COLOR: EAECEC;">
-                  <div class="row no-gutters" style="margin-bottom: 0px;">
-
-                    <div style="display: flex;">
-
-
-                    <div class="col-md-4" style="top: 5%; background-color: #FFFFBF;">
-                      <div class="card-body text-center" style="font-size: 18px;">
-                        <b class="card-text" style="color: black;">≠q≥Ê§È¥¡</b><p></p>
-                        <p class="card-text">2018/10/18</p>
-                        <b class="card-text" style="color: black;">¡`™˜√B</b><p></p>
-                        <p class="card-text">$19990</p>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4" style="top: 5%;">
-                      <div class="card-body text-center" style="font-size: 18px;">
-                        <b class="card-text" style="color: black;">¶Êµ{¶W∫Ÿ</b><p></p>
-                        <p class="card-text">æ¡§B≈È≈ÁºÁ§Ù</p>
-                        <p class="card-text">æ¡§BPADIºÁ§Ù</p>
-                        <p class="card-text">∫ÒÆqæ…ºÁºÁ§Ù</p>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4" style="top: 5%;">
-                      <div class="card-body text-center" style="font-size: 18px;">
-                        <b class="card-text" style="color: black;">•Xµo§È¥¡</b><p></p>
-                        <p class="card-text">2018/11/18</p>
-                        <p class="card-text">2018/12/18</p>
-                        <p class="card-text">2019/01/18</p>
-                      </div>
-                    </div>
-
-                    <div class="col-md-3" style="top: 5%;">
-                      <div class="card-body text-center" style="font-size: 18px;">
-                        <b class="card-text" style="color: black;">§Hº∆</b><p></p>
-                        <p class="card-text">1§H</p>
-                        <p class="card-text">8§H</p>
-                        <p class="card-text">2§H</p>
-                      </div>
-                    </div>
-
-                    </div>
-
-                  </div>
-                </div>
-
-            		</div>
-
-                <div class=card-deck>
-
-                  <div class="col-md-3 p-0" style="margin-bottom: 0px; margin-top: 10px;">
-                    <img src="./image/order2.jpg" class="card-img w-100" alt="">
-                  </div>
-                  <div class="card mb-3" style="max-width: 1200px; height: 200px;overflow-y:scroll; SCROLLBAR-FACE-COLOR: #c2d3fc; SCROLLBAR-HIGHLIGHT-COLOR: #c2d3fc; SCROLLBAR-SHADOW-COLOR: BLACK; SCROLLBAR-3DLIGHT-COLOR: #c2d3fc; SCROLLBAR-ARROW-COLOR:#000000; SCROLLBAR-TRACK-COLOR: FFFFFF; SCROLLBAR-DARKSHADOW-COLOR: EAECEC;">
-                    <div class="row no-gutters" style="margin-bottom: 0px;">
-
-                      <div style="display: flex;">
-
-
-                      <div class="col-md-4" style="top: 5%;">
-                        <div class="card-body text-center" style="font-size: 18px;">
-                          <b class="card-text" style="color: black;">≠q≥Ê§È¥¡</b><p></p>
-                          <p class="card-text">2018/10/18</p>
-                          <b class="card-text" style="color: black;">¡`™˜√B</b><p></p>
-                          <p class="card-text">$19990</p>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4" style="top: 5%;">
-                        <div class="card-body text-center" style="font-size: 18px;">
-                          <b class="card-text" style="color: black;">¶Êµ{¶W∫Ÿ</b><p></p>
-                          <p class="card-text">æ¡§B≈È≈ÁºÁ§Ù</p>
-                          <p class="card-text">æ¡§BPADIºÁ§Ù</p>
-                          <p class="card-text">∫ÒÆqæ…ºÁºÁ§Ù</p>
-                        </div>
-                      </div>
-
-                      <div class="col-md-4" style="top: 5%;">
-                        <div class="card-body text-center" style="font-size: 18px;">
-                          <b class="card-text" style="color: black;">•Xµo§È¥¡</b><p></p>
-                          <p class="card-text">2018/11/18</p>
-                          <p class="card-text">2018/12/18</p>
-                          <p class="card-text">2019/01/18</p>
-                        </div>
-                      </div>
-
-                      <div class="col-md-3" style="top: 5%;">
-                        <div class="card-body text-center" style="font-size: 18px;">
-                          <b class="card-text" style="color: black;">§Hº∆</b><p></p>
-                          <p class="card-text">1§H</p>
-                          <p class="card-text">8§H</p>
-                          <p class="card-text">2§H</p>
-                        </div>
-                      </div>
-
-                      </div>
-
-                    </div>
-                  </div>
-
-              		</div>
 </body>
 </html>

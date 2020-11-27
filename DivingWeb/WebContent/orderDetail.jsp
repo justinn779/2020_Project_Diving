@@ -28,8 +28,9 @@
 						<p class="card-text">
 							行程編號：<c:out value="${tourSupplier.tourNum}"/><br>
 							行程名稱:<c:out value="${tourSupplier.tourName}"/><br>
-							潛點編號：<c:forEach var="tourSpot" items="${tourSupplier.tourspot}">
-									<c:out value="${tourSpot.spotNum}"/>
+							潛點編號：<c:forEach var="tourSpot" items="${tourSupplier.tourspot}" varStatus="status">
+									<c:if test="${!status.last}"><c:out value="${tourSpot.spotNum}"/>,</c:if>
+									<c:if test="${status.last}"><c:out value="${tourSpot.spotNum}"/></c:if>
 									</c:forEach><br>
 							金額：<c:out value="${tourSupplier.tourPrice}"/> NT$<br>
 							天數：<c:out value="${tourSupplier.tourSize}"/><br>
@@ -37,12 +38,12 @@
 							住:<c:out value="${tourSupplier.tourMotel}"/><br> 
 							交通:<c:out value="${tourSupplier.tourTraffic}"/><br>
 							上/下架：<c:out value="${tourSupplier.tourShow}"/>
-						</p><c:out value="${tourSupplier.tourNum}"/>
-						<small class="text-muted" style="padding-bottom: 20px;">更改日期</small>
+						</p>
+						
 						<div id="update/delete"
 							style="padding-top: 40px;">
 							<button type="button" class="btn btn-primary btn-sm"
-								data-toggle="modal" data-target="#update${tourSupplier.tourNum}" id="update$(tourSupplier.tourNum)">更改</button>
+								data-toggle="modal" data-target="#update<c:out value="${tourSupplier.tourNum}"/>" id="update$(tourSupplier.tourNum)">更改</button>
 							<button type="button" class="btn btn-danger btn-sm"
 								data-toggle="modal" data-target="#delete<c:out value="${tourSupplier.tourNum}"/>" id="<c:out value="${tourSupplier.tourNum}"></c:out>">刪除</button>
 						</div>
@@ -52,12 +53,12 @@
 				
 	<!-- 彈窗行程資料更改 -->
 	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-		id="update${tourSupplier.tourNum}" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		id="update<c:out value="${tourSupplier.tourNum}"/>" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalCenterTitle">更改行程資料</h5>
+						<h5 class="modal-title" id="exampleModalCenterTitle" style="border-bottom:0px; text-align: center; margin-left:40px;">更改行程資料</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -68,58 +69,55 @@
 							<div class="form-row">
 								<div class="form-group col-md">
 									<label for="inOrderName">行程名稱</label> <input type="text"
-										class="form-control" id="inOrderName" style="width: 450px;"
+										class="form-control" id="supplierUpateTourName<c:out value="${tourSupplier.tourNum}"/>" style="width: 450px;"
 										value="<c:out value="${tourSupplier.tourName}"/>">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md">
 									<label for="inputOrderCont">潛點編號</label> <input type="text"
-										class="form-control" id="inputOrderCont" style="width: 450px;"
-										value="<c:forEach var="tourSpot" items="${tourSupplier.tourspot}">
-											   <c:out value="${tourSpot.spotNum}"/>
-									     	   </c:forEach>">
+										class="form-control" id="supplierUpdateTourSpot<c:out value="${tourSupplier.tourNum}"/>" style="width: 450px;"
+										value="<c:forEach var="tourSpot" items="${tourSupplier.tourspot}" varStatus="status"><c:if test="${!status.last}"><c:out value="${tourSpot.spotNum}"/>,</c:if><c:if test="${status.last}"><c:out value="${tourSpot.spotNum}"/></c:if></c:forEach>">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-4">
 									<label for="inputMoney">金額</label> <input type="text"
-										class="form-control" id="inputMoney" value="<c:out value="${tourSupplier.tourPrice}"/>">
+										class="form-control" id="supplierUpateTourMoney<c:out value="${tourSupplier.tourNum}"/>" value="<c:out value="${tourSupplier.tourPrice}"/>">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="inputDay">天數</label> <input type="text"
-										class="form-control" id="inputDay" value="<c:out value="${tourSupplier.tourSize}"/>">
+										class="form-control" id="supplierUpateTourDay<c:out value="${tourSupplier.tourNum}"/>" value="<c:out value="${tourSupplier.tourSize}"/>">
 								</div>
 								<div class="form-group col-md-4">
-									<label for="inputUp">上/下架</label> <select id="inputUp"
+									<label for="inputUp">上/下架</label> <select id="supplierUpateTourShow<c:out value="${tourSupplier.tourNum}"/>"
 										class="form-control">
-										<option selected>上架</option>
-										<option>下架</option>
+										<option <c:if test="${tourSupplier.tourShow=='上架'}">selected</c:if>>上架</option>
+										<option <c:if test="${tourSupplier.tourShow=='下架'}">selected</c:if>>下架</option>
 									</select>
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col">
 									<label for="inputFood">食</label> <input type="text"
-										class="form-control" id="inputFood"
+										class="form-control" id="supplierUpateTourFood<c:out value="${tourSupplier.tourNum}"/>"
 										value="<c:out value="${tourSupplier.tourFood}"/>">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputDay">住</label> <input type="text"
-										class="form-control" id="inputDay" value="<c:out value="${tourSupplier.tourMotel}"/>">
+										class="form-control" id="supplierUpateTourMotel<c:out value="${tourSupplier.tourNum}"/>" value="<c:out value="${tourSupplier.tourMotel}"/>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputFood">交通</label> <input type="text"
-										class="form-control" id="inputFood" value="text<c:out value="${tourSupplier.tourTraffic}"/>">
+										class="form-control" id="supplierUpateTourTraffic<c:out value="${tourSupplier.tourNum}"/>" value="<c:out value="${tourSupplier.tourTraffic}"/>">
 								</div>
 							</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary">儲存</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" id="<c:out value="${tourSupplier.tourNum}"/>" value="<c:out value="${tourSupplier.tourNum}"/>" onclick="update_click(this.id)">儲存</button>
 					</div>
 				</div>
 			</div>
@@ -132,7 +130,7 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalCenterTitle">刪除提醒</h5>
+					<h5 class="modal-title" id="exampleModalCenterTitle" style="border-bottom:0px; text-align: center; margin-left:40px;">刪除提醒</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -149,7 +147,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- 彈窗行程刪除 -->
+	
 				</c:forEach>
 
 

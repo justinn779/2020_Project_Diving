@@ -371,12 +371,24 @@
 				</div>
 			</div>
 		</div>
+<div id="jjj">
 
+</div>
 	</footer>
 
 	<script>
 		function toChart() {
-
+			
+			$.post("purchaseJudge.jsp", function(data){
+				$("#jjj").html(data);
+				if($("#judge").val()=="member"){
+					document.location.href = "./memberDetail.html?member";
+				} 
+				else {
+					alert("請先登入會員");
+				}
+				
+			});
 		}
 	</script>
 
@@ -391,6 +403,8 @@
 
 			$.post("logout.jsp");
 			window.location.reload();
+			window.location.href.split('?')[0];
+			
 		}
 	</script>
 
@@ -416,6 +430,7 @@
 				"memberPassword" : $("#memberPassword").val()
 			}, function(data) {
 				$("#mac2m").html(data);
+				
 			});
 		}
 	</script>

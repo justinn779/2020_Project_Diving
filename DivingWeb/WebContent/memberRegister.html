@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
 <head>
 
   <meta charset="UTF-8">
@@ -422,17 +422,29 @@ function regi(){
 		"birth":$("#validationCustomBirth").val(),
 		"name":$("#validationCustomName").val(),
 		"mail":$("#validationCustomMail").val(),
-		"phone":$("#validationCustomPhone").val()}).then(function(){
+		"phone":$("#validationCustomPhone").val()}, function(data){
+			alert(data);
+		}).then(function(){
 			
 			return $.post("loginServlet", {"actor": "member",
 				"memberId":$("#validationCustomUsername").val(),
 				"memberPassword":$("#validationCustomPassword").val()}, 
 			function(data){
 			$("#mac2m").html(data);
-
+			window.location.href = "./mainPage.html";
 			});
 				
 			});
+			
+			/*$.post("memberServlet",{"methods":"create",
+				"memberId":$("#validationCustomUsername").val(),
+				"memberPassword":$("#validationCustomPassword").val(),
+				"birth":$("#validationCustomBirth").val(),
+				"name":$("#validationCustomName").val(),
+				"mail":$("#validationCustomMail").val(),
+				"phone":$("#validationCustomPhone").val()}, function(data){
+					alert(data);
+				});*/
 
 }
 </script>
@@ -504,7 +516,7 @@ function regi(){
       // Loop over them and prevent submission
       var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
-        	
+          event.preventDefault();
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();

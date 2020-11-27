@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
 <head>
 
   <meta charset="UTF-8">
@@ -360,7 +360,7 @@
               </div>
 
 				<!-- 新增Btn的id和value-->
-              <button class="btn btn-primary" type="submit" id=methodsBtnSsupplier value="create" onclick="regi()">確認註冊</button>
+              <button class="btn btn-primary" type="submit" id="methodsBtnSsupplier" value="create" onclick="regi()">確認註冊</button>
             </form>
         </div>
 
@@ -473,12 +473,12 @@
       // Loop over them and prevent submission
       var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
+        	event.preventDefault();
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
           }
           form.classList.add('was-validated');
-          window.location.href = "./mainPage.html";
         }, false);
       });
     }, false);
@@ -508,13 +508,14 @@
   
 <script>
 function regi(){
-	
+
 	$.post("supplierServlet",{"methods":$("#methodsBtnSsupplier").val(),
 		  "supplierName":$("#supplierName").val(),
 		  "supplierId":$("#supplierReId").val(),
 		  "supplierPassword":$("#supplierRePassword").val(),
 		  "supplierMail":$("#supplierMail").val(),
-		  "supplierPhone":$("#supplierPhone").val()
+		  "supplierPhone":$("#supplierPhone").val()}, function(data){
+			alert(data);
 		}).then(function(){
 			
 			return $.post("loginServlet", {"actor": "supplier",
@@ -522,6 +523,7 @@ function regi(){
 				"supplierPassword":$("#supplierRePassword").val()}, 
 			function(data){
 			$("#mac2m").html(data);
+			window.location.href = "./mainPage.html";
 
 			});
 				

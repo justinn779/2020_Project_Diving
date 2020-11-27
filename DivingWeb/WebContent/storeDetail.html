@@ -14,7 +14,7 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<link rel="stylesheet" href="memberDetail.css">
+<link rel="stylesheet" href="storeDetail.css">
   <link rel="stylesheet" href="convertM2C.css">
   <link rel="stylesheet" href="SlideBar.css">
 
@@ -372,11 +372,14 @@
 
 	function reply_click(clicked_id)
 	  {
-		$('#d'+clicked_id).modal('hide');
-		alert("刪除行程成功");
+		
+		
 		
 		$.post("tourServlet",{"methods":"deletetour",
 			  "supplierDdeleteTourNum":$("#" + clicked_id).val()
+		     }, function(data){
+		    	 alert(data);
+		    	 $('#d'+clicked_id).modal('hide');
 		     }).then(function(){
 				
 				return $.post("tourServlet",{"methods":"tourReadSupplier"}, function(data) {
@@ -385,6 +388,67 @@
 					
 				});
 			
+	  }
+	  
+	  	
+</script>
+
+<!-- 修改廠商資料 -->
+	<script>
+	function modifystoredata()
+	  {
+	      
+	      
+	      
+			
+	      $.post("supplierServlet",{"methods":"update",
+			  "supplierUpdateName":$("#supplierUpdateName").val(),
+			  "supplierUpdatePassword":$("#supplierUpdatePassword").val(),
+			  "supplierUpdateMail":$("#supplierUpdateMail").val(),
+			  "supplierUpdatePhone":$("#supplierUpdatePhone").val()
+				}, function(data){
+					alert(data);
+					$('#msd').modal('hide');
+				}).then(function(){
+					
+					return $.post("supplierServlet",{"methods":"read"} ,function(data){
+			  	    	  $("#mm").html(data);
+		  	      	});
+				
+	  });
+				}
+	  
+
+	</script>
+
+
+<!-- 廠商更新行程 -->
+<script>
+
+	function update_click(clicked_id)
+	  {
+	      
+	      $('#update'+ clicked_id ).modal('hide');
+	      alert("修改行程成功");
+			
+	      $.post("tourServlet",{"methods":"update",
+				"supplierUpdateTourNum":clicked_id,
+				"supplierUpdateTourName":$("#supplierUpateTourName"+clicked_id).val(),
+				"supplierUpdateTourPrice":$("#supplierUpateTourMoney"+clicked_id).val(),
+				"supplierUpdateTourSize":$("#supplierUpateTourDay"+clicked_id).val(),
+				"supplierUpdateTourFood":$("#supplierUpateTourFood"+clicked_id).val(),
+				"supplierUpdateTourMotel":$("#supplierUpateTourMotel"+clicked_id).val(),
+				"supplierUpdateTourTraffic":$("#supplierUpateTourTraffic"+clicked_id).val(),
+				"supplierUpdateTourShow":$("#supplierUpateTourShow"+clicked_id).val(),
+				"supplierUpdateTourSpot":$("#supplierUpdateTourSpot"+clicked_id).val(),		
+				
+			}).then(function(){
+					
+					return $.post("tourServlet",{"methods":"tourReadSupplier"}, function(data) {
+						document.getElementById('mm').innerHTML = data;
+					});
+						
+					});
 	  }
 	  
 	  	

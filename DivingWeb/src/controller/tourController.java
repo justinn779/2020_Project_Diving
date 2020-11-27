@@ -456,5 +456,45 @@ public class tourController implements tourInterface{
 	        System.out.println("tourSpotDelete Success");
 			return true;
 	}
+	
+	//行程編號查詢行程名稱
+		public tourModel tourReadByTourNum (Integer tourNum) {
+			tourModel result=new tourModel();
+			Connection conn = connection.getDB();
+			String sql = "select * from " + connection.schema + ".tour where tourNum="+tourNum;
+			try {
+				Statement s = conn.createStatement();
+				ResultSet rs = s.executeQuery(sql);
+				while(rs.next()) {
+					result.setTourNum(rs.getInt("tourNum"));
+					result.setSupplierNum(rs.getInt("supplierNum"));
+					result.setTourName(rs.getString("tourName"));
+					result.setTourPrice(rs.getInt("tourPrice"));
+					result.setTourSize(rs.getInt("tourSize"));
+					result.setTourFood(rs.getString("tourFood"));
+					result.setTourMotel(rs.getString("tourMotel"));
+					result.setTourTraffic(rs.getString("tourTraffic"));
+					result.setTourShow(rs.getString("tourShow"));
+					
+					Connection conn2 = connection.getDB();
+					String sql2 = "select * from " + connection.schema + ".tourSpot where tourNum=" + result.getTourNum();
+					Statement s2 = conn2.createStatement();
+					ResultSet rs2 = s2.executeQuery(sql2);
+					ArrayList<tourspotModel> atsm = new ArrayList<tourspotModel>();
+					while (rs2.next()) {
+						tourspotModel tsm = new tourspotModel();
+						tsm.setTourspotNum(rs2.getInt("tourspotNum"));
+						tsm.setSpotNum(rs2.getInt("spotNum"));
+						atsm.add(tsm);
+					}
+					result.setTourspot(atsm);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return result;
+		}
 
 }

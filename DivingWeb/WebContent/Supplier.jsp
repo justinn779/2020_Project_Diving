@@ -60,13 +60,13 @@
 		</div>
 	</div>
 	<!-- 彈窗廠商資料更改 -->
-	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+	<div class="modal fade bd-example-modal-lg" id="msd" tabindex="-1" role="dialog"
 		aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalCenterTitle">更改資料</h5>
+						<h5 class="modal-title" id="exampleModalCenterTitle" style="border-bottom: 0px; margin-left: 40px; text-align: center;">更改資料</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -77,7 +77,7 @@
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inSupplierName">廠商名稱</label> <input type="text"
-										class="form-control" id="supplierUpdateName" value="今天要潛水嗎">
+										class="form-control" id="supplierUpdateName" value="${requestScope.supplierReadName}">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="inputPassword4">廠商密碼</label> <input type="password"
@@ -86,12 +86,12 @@
 							</div>
 							<div class="form-group">
 								<label for="inputAddress">電子信箱</label> <input type="email"
-									class="form-control" id="supplierUpdateMail" value="a820608s@gmail.com">
+									class="form-control" id="supplierUpdateMail" value="${requestScope.supplierReadMail}">
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="inputPhone">連絡電話</label> <input type="text"
-										class="form-control" id="supplierUpdatePhone" value="+886-910-527427">
+										class="form-control" id="supplierUpdatePhone" value="${requestScope.supplierReadPhone}">
 								</div>
 							</div>
 						</form>
@@ -100,24 +100,12 @@
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">取消</button>
 							<!-- 新增id -->
-						<button type="button" class="btn btn-primary" id=methodsBtnSupplierUupdate>儲存</button>
+						<button type="button" class="btn btn-primary" id=methodsBtnSupplierUupdate onclick="modifystoredata()">儲存</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- 修改廠商資料 -->
-	<script>
-	$("#methodsBtnSupplierUupdate").click(function(){
-		//alert("123");
-		$.post("supplierServlet",{"methods":"update",
-								  "supplierUpdateName":$("#supplierUpdateName").val(),
-								  "supplierUpdatePassword":$("#supplierUpdatePassword").val(),
-								  "supplierUpdateMail":$("#supplierUpdateMail").val(),
-								  "supplierUpdatePhone":$("#supplierUpdatePhone").val()});
-		});
-	//按下儲存要跳窗，還有縣市更新後的基本資料
-	</script>
 	
 </body>
 </html>

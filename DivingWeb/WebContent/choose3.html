@@ -270,7 +270,8 @@
 					<li class="nav-item"><a class="nav-link" href="./choose1.html">潛水行程</a>
 					</li>
 
-					<li class="nav-item"><a class="nav-link" href="#">購物車</a></li>
+					<li class="nav-item"><a class="nav-link" onclick="toChart()"
+						style="cursor: pointer;">購物車</a></li>
 
 					<li class="nav-item"><a class="nav-link" href="#">聯絡我們</a></li>
 
@@ -368,6 +369,27 @@
 
 	</footer>
 	<!-- foot -->
+<div id="jjj">
+
+</div>
+  </footer>
+
+<script>
+		function toChart() {
+			
+			$.post("purchaseJudge.jsp", function(data){
+				$("#jjj").html(data);
+				if($("#judge").val()=="member"){
+					document.location.href = "./memberDetail.html?member";
+				} 
+				else {
+					alert("請先登入會員");
+				}
+				
+			});
+		}
+	</script>
+	
 	<script type="text/javascript">
 		//選項
 		var colleges = [ '台北', '新北', '基隆', '宜蘭', '台中', '屏東', '琉球', '澎湖', '綠島',

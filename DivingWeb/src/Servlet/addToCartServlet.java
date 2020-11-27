@@ -49,8 +49,7 @@ public class addToCartServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		session.setAttribute("cart", acm);
 		//測試購物車
-		System.out.println(request.getParameter("tourDate"));
-		for(cartModel x:acm) System.out.println(x.getTourNum()+","+x.getTourName()+","+x.getTourPeople()+","+x.getTourPrice()+","+x.getTourDate());
+		for(cartModel x:acm) System.out.println(x.getTourNum()+","+x.getTourName()+","+x.getTourPeople()+","+x.getTourPrice());
 	}
 
 }

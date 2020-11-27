@@ -13,7 +13,7 @@
 			<div class="card-deck">
 				<c:forEach var="spot" items="${spot}">
 					<div class="col-md-3"
-						style="max-width: 100%; padding-bottom: 10px;">
+						style="max-width: 100%; padding-bottom: 10px; margin-top: 10px;">
 						<div class="card" style="height: 460px; width: 250px;">
 							<img src="image/spot/${spot.spotNum}/1.jpg" class="card-img-top" alt="..."
 								data-toggle="modal" data-target="#showcard">

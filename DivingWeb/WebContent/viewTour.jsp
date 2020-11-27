@@ -12,10 +12,10 @@
 
 		<div class="card-deck">
 			<c:forEach var="tour" items="${tourRead}">
-				<div class="col-md-3">
+				<div class="col-md-3" style="margin-top: 10px;">
 					<div class="card">
 						<img src="image/tour/${tour.tourNum}/1.jpg" class="card-img-top"
-							alt="..." data-toggle="modal" data-target="#showcard">
+							alt="..." data-toggle="modal" data-target="#showcard${tour.tourNum}">
 						<div class="card-body">
 							<h5 class="card-title">${tour.tourName}</h5>
 							<p class="card-text">
@@ -39,7 +39,6 @@
 								<%
 									}
 								%>
-								<br> <small class="text-muted">更新日期</small>
 						</div>
 					</div>
 				</div>
@@ -107,11 +106,11 @@
 									</p>
 								</div>
 							</div>
-							<div class="modal-footer">
-							人數：<input type='number' id="people${tour.tourNum}" value='1' >
-							<button type="button" id="${tour.tourNum}"
+							<div class="modal-footer text-center">
+							人數：<input type='number' id="people${tour.tourNum}" value='1' min="0" style="width:30%;">
+							出發日期：<input type="Date" id="tourDate${tour.tourNum}" style="width:30%;">
+								<button type="button" id="${tour.tourNum}"
 									class="btn btn-primary" onclick="addToCart${tour.tourNum}()">加入購物車</button>
-							出發日期：<input type="Date" id="tourDate${tour.tourNum}" >
 								
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">退出</button>
@@ -130,7 +129,11 @@
 				</script>
 				<script type="text/javascript">
 					function addToCart${tour.tourNum}(){
-						$.post("addToCartServlet",{"tourNum":${tour.tourNum},"tourDate":$("#tourDate"+${tour.tourNum}).val(),"people":$("#people"+${tour.tourNum}).val()},function(){alert("加入購物車成功")})
+						$.post("addToCartServlet",{"tourNum":${tour.tourNum},"tourDate":$("#tourDate"+${tour.tourNum}).val(),"people":$("#people"+${tour.tourNum}).val()},function(){
+							
+							$("#showcard${tour.tourNum}").modal("hide");
+							alert("加入購物車成功");
+							})
 					}
 				</script>
 			</c:forEach>

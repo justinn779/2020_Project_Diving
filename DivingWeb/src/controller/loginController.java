@@ -18,7 +18,7 @@ public class loginController {
 		//System.out.println( new loginController().readSupplierNumById("klook"));
 	}
 	
-	public String loginActor(String actor,String Id,String Password) {
+	public String loginActor(String actor,String Id,String Password, boolean registerfail) {
 		String message="";
 		Connection conn = connection.getDB();
 		
@@ -40,7 +40,11 @@ public class loginController {
 					sqlId=rs.getString(actor+"Id");
 					sqlPassword=rs.getString(actor+"Password");
 					//判斷密碼
-					if(sqlPassword.equals(Password)) {
+					
+					if(!registerfail) {message="帳號名稱已經被人使用";
+					}
+					
+					else if(sqlPassword.equals(Password)) {
 						message="LoginSuccessfully";
 						
 					}else {

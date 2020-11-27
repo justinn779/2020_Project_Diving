@@ -64,10 +64,12 @@ header .egg h5{
   border-radius: 15px 15px 0 0;
   background: linear-gradient(-135deg, #c850c0, #4158d0);
 }
-.wrapper form{
+
+.wrapper form #addOrder{
   padding: 10px 30px 50px 30px;
   background-color: #A5DEE4;
 }
+
 .wrapper form .field{
   height: 50px;
   width: 100%;

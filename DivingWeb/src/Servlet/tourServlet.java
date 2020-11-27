@@ -154,28 +154,54 @@ public class tourServlet extends HttpServlet {
 				break;
 				
 			case "update":
-				ArrayList<tourspotModel> aupdate=new ArrayList<tourspotModel>(
-						Arrays.asList(new tourspotModel(Integer.parseInt(request.getParameter("spot1"))),
-								      new tourspotModel(Integer.parseInt(request.getParameter("spot2"))),
-								      new tourspotModel(Integer.parseInt(request.getParameter("spot3")))));
+				//把tourSpot的,分開
+				String [] strUpdateSpot=request.getParameter("supplierUpdateTourSpot").trim().split(",");
 				
-				tourModel aupdatetour=new tourModel(Integer.parseInt(request.getParameter("tourNum")),
-												   request.getParameter("tourName"),
-						                   		   Integer.parseInt(request.getParameter("tourPrice")),
-						                           Integer.parseInt(request.getParameter("tourSize")),
-						                           request.getParameter("tourFood"),
-						                           request.getParameter("tourMotel"),
-						                           request.getParameter("tourTraffic"),
-						                           request.getParameter("tourShow"),
-						                           Integer.parseInt(request.getParameter("supplierNum")),
-						                           aupdate);
-				request.setAttribute("ans", tc.update(aupdatetour));
+				//要找到原始行程潛點編號(toutSpotNum)
+				
+				ArrayList<Integer> tourhaveSpotNum=new ArrayList<>();
+				//廠商有哪些行程
+				ArrayList<tourModel> SupplierHaveTour = tc.supplierRead(Integer.parseInt(session.getAttribute("Num").toString()));//廠商編號搜尋行程
+					
+				
+				for(tourModel x:SupplierHaveTour) {
+					
+					for( tourspotModel y:x.getTourspot()) {
+						//行程裡的潛點編號
+						if(x.getTourNum().equals(Integer.parseInt(request.getParameter("supplierUpdateTourNum")))) {
+							tourhaveSpotNum.add(y.getTourspotNum());
+						}
+					}
+				}
+				//要更新行程有哪些潛點
+				ArrayList<tourspotModel> aUpdateTourSpot=new ArrayList<tourspotModel>();
+				
+				for(int i=0;i<strUpdateSpot.length-1;i++) {
+					aUpdateTourSpot.add(new tourspotModel(/*原本潛點的編號*/tourhaveSpotNum.get(i),Integer.parseInt(strUpdateSpot[i])));
+				}
+				
+				tourModel supplierUpdateTour=new tourModel(
+												   Integer.parseInt(request.getParameter("supplierUpdateTourNum")),
+												   request.getParameter("supplierUpdateTourName"),
+						                   		   Integer.parseInt(request.getParameter("supplierUpdateTourPrice")),
+						                           Integer.parseInt(request.getParameter("supplierUpdateTourSize")),
+						                           request.getParameter("supplierUpdateTourFood"),
+						                           request.getParameter("supplierUpdateTourMotel"),
+						                           request.getParameter("supplierUpdateTourTraffic"),
+						                           request.getParameter("supplierUpdateTourShow"),
+						                           Integer.parseInt(session.getAttribute("Num").toString()),
+						                           aUpdateTourSpot);
+				request.setAttribute("ans", tc.update(supplierUpdateTour));
+				if(request.getAttribute("ans").equals(true)) response.getWriter().append("修改行程成功");
+				else response.getWriter().append("修改行程失敗");
 				break;
 				
 			case "deletetour":
 //				System.out.println("deletetour");
 				System.out.println("SUP: " + request.getParameter("supplierDdeleteTourNum"));
 				request.setAttribute("ans", tc.deletetour(Integer.parseInt(request.getParameter("supplierDdeleteTourNum"))));
+				if(request.getAttribute("ans").equals(true)) response.getWriter().append("刪除行程成功");
+				else response.getWriter().append("刪除行程失敗");
 				break;
 				
 			case "deletetourspot": 

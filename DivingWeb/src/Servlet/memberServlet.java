@@ -21,7 +21,7 @@ public class memberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	memberController mc = new memberController();
 	DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	
+	boolean msf;
 	
 	public memberServlet() {
 		super();
@@ -30,19 +30,27 @@ public class memberServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		response.setCharacterEncoding("utf-8");
 		switch (request.getParameter("methods")) {
 		case "create":
-			System.out.println(request.getParameter("birth"));
+			System.out.println("ID: " + request.getParameter("memberId"));
 			try {
 				memberModel createmem = new memberModel(
-						request.getParameter("id"),
-						request.getParameter("password"),
+						request.getParameter("memberId"),
+						request.getParameter("memberPassword"),
 						request.getParameter("name"),
 						sdf.parse(request.getParameter("birth")),
 						request.getParameter("mail"),
 						request.getParameter("phone")
 						);
-				request.setAttribute("ans", mc.create(createmem));
+				msf =  mc.create(createmem);
+				
+				session.setAttribute("registerfail", msf);
+				
+				if(!msf) response.getWriter().append("註冊失敗");
+				else response.getWriter().append("註冊成功");
+				
+
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

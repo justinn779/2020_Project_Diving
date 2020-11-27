@@ -55,13 +55,13 @@ public class tournumreadServlet extends HttpServlet {
 
 		switch (request.getParameter("methods")) {
 		case "tournumRead":
-			// §PÂ_¬O§_¿é¤J
+			// ï¿½Pï¿½_ï¿½Oï¿½_ï¿½ï¿½J
 			// if (request.getParameter("num").equals("")) {
 			// num = -1;
 			// } else {
 			// num = Integer.parseInt(request.getParameter("num"));
 			// }
-			ArrayList<tourModel> tourRead = tc.tournumRead(6);
+			ArrayList<tourModel> tourRead = tc.tournumRead(8);
 			// String tourjson=gson.toJson(tourRead);
 			// response.getWriter().append(tourjson);
 			request.setAttribute("tourRead",tourRead);

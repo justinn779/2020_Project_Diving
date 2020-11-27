@@ -8,10 +8,21 @@ public class cartModel{
 	private String tourDate;
 	private Integer tourPrice;
 	private Integer tourPeople;
+	private Integer tourTotalPrice;//增加行程的總價=價格*人數
 	
 	public cartModel() {
 		super();
 	}
+	
+	public Integer getTourTotalPrice() {
+		return tourTotalPrice;
+	}
+	
+	public void setTourTotalPrice(Integer tourTotalPrice) {
+		this.tourTotalPrice = tourTotalPrice;
+	}
+	
+	
 	public cartModel(String tourName, Integer tourNum, String tourDate, Integer tourPrice, Integer tourPeople) {
 		super();
 		this.tourName = tourName;
@@ -19,6 +30,7 @@ public class cartModel{
 		this.tourDate = tourDate;
 		this.tourPrice = tourPrice;
 		this.tourPeople = tourPeople;
+		tourTotalPrice=this.tourPrice*this.tourPeople;
 	}
 	public String getTourName() {
 		return tourName;
